@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ඇන්ත්‍රැක්නෝස් (Anthracnose) | CropCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #14919b;
+            --accent: #ff7e33;
+            --glass: rgba(255, 255, 255, 0.85);
+            --text: #333;
+            --bg: linear-gradient(135deg, #f5f9ff 0%, #e8f4ff 100%);
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --card-border: rgba(255, 255, 255, 0.3);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --primary: #f5f7fa;
+            --secondary: #1abc9c;
+            --accent: #ff9a3c;
+            --glass: rgba(30, 30, 30, 0.85);
+            --text: #f0f0f0;
+            --bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --card-bg: rgba(46, 46, 46, 0.8);
+            --card-border: rgba(255, 255, 255, 0.05);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Noto Sans Sinhala', 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            transition: all 0.5s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Animated Luxury Header */
+        .luxury-header {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 0 0 20px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .luxury-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            100% {
+                left: 100%;
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: right;
+            animation: titleUnderline 2s forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes titleUnderline {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        /* Premium Card Design */
+        .premium-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border-radius: 18px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+        }
+
+        .premium-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Card Types */
+        .organic {
+            background: rgba(240, 255, 240, 0.85);
+        }
+        .dark-mode .organic {
+            background: rgba(46, 70, 46, 0.85);
+        }
+
+        .chemical {
+            background: rgba(255, 245, 245, 0.85);
+        }
+        .dark-mode .chemical {
+            background: rgba(70, 46, 46, 0.85);
+        }
+
+        .caution {
+            background: rgba(255, 243, 205, 0.9);
+            border-left: 5px solid #ffc107;
+        }
+        .dark-mode .caution {
+            background: rgba(70, 63, 46, 0.85);
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        /* Enhanced Image Gallery */
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            touch-action: pan-y pinch-zoom;
+        }
+
+        .gallery-slides {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+            height: 400px;
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            touch-action: pan-y pinch-zoom;
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .dark-mode-toggle i {
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        /* Content Styling */
+        ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .premium-card {
+                padding: 1.5rem;
+            }
+            
+            .gallery-slides {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle" id="darkModeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Animated Luxury Header -->
+    <div class="luxury-header">
+        <div class="container">
+            <h1><i class="fas fa-fungus"></i> ඇන්ත්‍රැක්නෝස් (Anthracnose) <small style="font-size: 1rem; opacity: 0.8;">(දිලීර රෝග)</small></h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Premium Image Gallery -->
+        <div class="gallery-container" id="imageSlider">
+            <div class="gallery-slides">
+                <div class="gallery-slide">
+                    <img src="https://eranda47.github.io/CropCare/Images/Anthracnose/Anthracnose1.webp" alt="Anthracnose Image 1">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://eranda47.github.io/CropCare/Images/Anthracnose/Anthracnose2.webp" alt="Anthracnose Image 2">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://eranda47.github.io/CropCare/Images/Anthracnose/Anthracnose3.webp" alt="Anthracnose Image 3">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://eranda47.github.io/CropCare/Images/Anthracnose/Anthracnose4.webp" alt="Anthracnose Image 4">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://eranda47.github.io/CropCare/Images/Anthracnose/Anthracnose5.webp" alt="Anthracnose Image 5">
+                </div>
+            </div>
+        </div>
+
+        <!-- Symptoms Card -->
+        <div class="premium-card">
+            <h2><i class="fas fa-bug"></i> රෝග ලක්ෂණ</h2>
+            <ul>
+                <li>ඵල වල අළු-දුඹුරු පැහැති ලප හටගනී.</li>
+                <li>ලප වල දාර තද දුඹුරු පැහැතිය.</li>
+                <li>ලප තුළ වෘත්තාකාර වළලු (Concentric rings) දක්නට ලැබේ.</li>
+                <li>ඵල වල ජලය තැවරූ ආකාරයේ වෘත්තාකාර හෝ කෝණාකාර තුවාල හටගනී. පසුව ඒවා මෘදු වී තරමක් ගිලා බසී.</li>
+                <li>තුවාල වල මධ්‍යය තැඹිලි හෝ දුඹුරු පැහැයක් ගන්නා අතර අවසානයේ කළු පැහැයට හැරේ. ඒ අවට පටක ලා පැහැයක් ගනී.</li>
+                <li>තුවාල ඵලයේ වැඩි කොටසක් ආවරණය කළ හැකිය.</li>
+                <li>ඵලවල එකකට වඩා වැඩි තුවාල ඇති විය හැකිය.</li>
+                <li>ඵල වල ලප තුළ වෘත්තාකාර වළලු බහුලව දක්නට ලැබේ.</li>
+                <li>කොළ පැහැති පලතුරු වලට රෝගය වැළඳිය හැකි නමුත් ඒවා ඉදුණු පසු රෝග ලක්ෂණ පෙන්නුම් කරයි.</li>
+                <li>ඵල/කරල් කුණුවීම සහ අතු වියළී යාම සිදුවේ.</li>
+                <li>කොළ සහ කඳේ කුඩා, අක්‍රමවත් හැඩැති අළු-දුඹුරු පැහැති ලප හටගනී.</li>
+                <li>ලප වල දාර තද දුඹුරු පැහැතිය.</li>
+            </ul>
+        </div>
+
+        <!-- Prevention Card -->
+        <div class="premium-card">
+            <h2><i class="fas fa-shield-alt"></i> ඇන්ත්‍රක්නෝස් රෝගය වැළක්වාගැනීමට පියවර</h2>
+            <ul>
+                <li><span class="bold">පැල සිටුවීමට පෙර කාබන් ප්‍රමාණය වැඩි කිරීම සඳහා පසට පොහොර යොදන්න.</span>
+                    <ul><li>මෙහිදී කාබනික පොහොර භාවිතය ඉතා යෝග්‍ය වේ.</li></ul>
+                </li>
+                <li><span class="bold">ජලය රැඳී සිටීම වළක්වා ගැනීමට හොඳ ජල බැසයෑමක් සැලසුම් කරන්න.</span>
+                    <ul><li>ජලය රැඳීම නිසා රෝගය පැතිරීම වේගවත් වේ.</li></ul>
+                </li>
+                <li><span class="bold">පස සහ පැලෑටි අතර බීජාණු (spores) සම්ප්‍රේෂණය වීම වැළැක්වීම සඳහා පේළි අතර වසුන් යොදන්න.</span>
+                    <ul><li>වසුන් යෙදීමෙන් පසේ තෙතමනය ආරක්ෂා වීමත් සමග රෝගය පැතිරීම අඩු කරයි.</li></ul>
+                </li>
+                <li><span class="bold">ඔබේ ප්‍රදේශයේ ප්‍රතිරෝධී ප්‍රභේද (resistant varieties) තිබේ නම් ඒවා වගා කරන්න.</span>
+                    <ul><li>ප්‍රතිරෝධී ප්‍රභේද රෝගයට ගොදුරු වීමේ අවදානම අඩු කරයි.</li></ul>
+                </li>
+                <li><span class="bold">නිරෝගී පැලෑටිවලින් හෝ සහතික කළ ප්‍රභවයන්ගෙන් බීජ භාවිතා කරන්න.</span>
+                    <ul><li>රෝගී බීජ භාවිතයෙන් රෝගය පැතිරීම වේගවත් වේ.</li></ul>
+                </li>
+                <li><span class="bold">පැල සිටුවීමට පෙර රෝගයේ සලකුණු සඳහා බීජ පැල පරීක්ෂා කරන්න.</span>
+                    <ul><li>රෝගී බීජ පැල සිටුවීමෙන් වගාවට රෝගය පැතිරිය හැක.</li></ul>
+                </li>
+                <li><span class="bold">රෝගයේ සලකුණු සඳහා නිතිපතා ක්ෂේත්‍රය නිරීක්ෂණය කරන්න.</span>
+                    <ul><li>රෝගය මුල් අවස්ථාවේදී හඳුනා ගැනීමෙන් පාලනය කිරීම පහසු වේ.</li></ul>
+                </li>
+                <li><span class="bold">ක්ෂේත්‍රය තුළ සහ අවට වල් පැලෑටි සහ විකල්ප ධාරක ඉවත් කරන්න.</span>
+                    <ul><li>වල් පැලෑටි සහ විකල්ප ධාරක රෝගය පැතිරීමට හේතු විය හැක.</li></ul>
+                </li>
+                <li><span class="bold">ඉහළින් ජලය දැමීම (overhead irrigation) වළක්වා උදෑසන පමණක් ජලය සපයන්න.</span>
+                    <ul><li>ඉහළින් ජලය දැමීමෙන් රෝගය පැතිරීම වේගවත් විය හැකියි.</li></ul>
+                </li>
+                <li><span class="bold">භේදනය කළ නයිට්‍රජන් යෙදුම් (split nitrogen applications) භාවිතා කරමින් ක්ෂේත්‍රයේ සමබර පොහොර යෙදීමක් සැලසුම් කරන්න.</span>
+                    <ul><li>පොහොර අසමබර වීමෙන් පැලෑටි දුර්වල වී රෝගවලට ගොදුරු වීමේ අවදානම වැඩි වේ.</li></ul>
+                </li>
+                <li><span class="bold">අස්වැන්න නෙලීමෙන් පසු පැලෑටි අපද්‍රව්‍ය පුළුස්සා ඉවත් කරන්න හෝ විනාශ කරන්න.</span>
+                    <ul><li>රෝගී පැලෑටි අපද්‍රව්‍යවල රෝග කාරක පැවතිය හැකි නිසා ඒවා විනාශ කිරීම ඉතා වැදගත් වේ.</li></ul>
+                </li>
+                <li><span class="bold">බෝග මාරුව සැලසුම් කරන්න, නමුත් ගම්මිරිස්, තක්කාලි වැනි බෝග සමඟ භ්‍රමණය වීමෙන් වළකින්න.</span>
+                    <ul><li>මෙම බෝග එකම පවුලට අයත් වන බැවින් එකම රෝගවලට ගොදුරු වීමේ අවදානමක් ඇත.</li></ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Organic Methods -->
+        <div class="premium-card organic">
+            <h2><i class="fas fa-leaf"></i> ඇන්ත්‍රැක්නෝස් රෝගය සඳහා කාබනික පාලන ක්‍රම</h2>
+            <p><span class="bold">ශාක නිශ්සාරක:</span></p>
+            <ul>
+                <li><span class="bold">නීම් (Azadirachta indica):</span> නීම් සාරය මගින් කොලෙටොට්‍රිකම් (Colletotrichum) දිලීරයේ බීජාණු ප්‍රරෝහණය වීම සහ මයිසිලියම් වර්ධනය වීම වළක්වයි.</li>
+                <li><span class="bold">සුදු ලූනු:</span> වතුර සමග තලා ගත් සුදු ලූනු කරාබු නැටි ප්‍රබල දිලීර නාශක ඉසිනක් ලෙස ක්‍රියා කරයි.</li>
+                <li><span class="bold">බුලත්:</span> බුලත් කොළ වලින් ලබාගන්නා සාරය කොලෙටොට්‍රිකම් කැප්සිකි වර්ධනය මර්දනය කරයි.</li>
+                <li><span class="bold">කප්පරවල්ලිය (Coleus aromaticus):</span> කප්පරවල්ලිය කොළ වලින් ලබාගන්නා සාරය රෝගකාරක දිලීරයට එරෙහිව නිෂේධනීය බලපෑම් පෙන්නුම් කරයි.</li>
+            </ul>
+            
+            <p><span class="bold">වගා උපක්‍රම:</span></p>
+            <ul>
+                <li><span class="bold">බෝග මාරුව:</span> රෝගකාරක ජීවන චක්‍රය බිඳ දැමීම සඳහා මිරිස් වගාව නොකරන බෝග (උදා: රනිල කුලයේ බෝග) සමඟ සෑම වසර 2-3 කට වරක් මාරු කිරීම.</li>
+                <li><span class="bold">ක්ෂේත්‍ර සනීපාරක්ෂාව:</span> රෝගය වැළඳුණු ශාක කොටස් ඉවත් කර විනාශ කිරීම මගින් රෝගකාරක මූලාශ්‍ර අඩු කිරීම.</li>
+                <li><span class="bold">නිසි පරතරය:</span> වාතය ගලායාම වැඩි දියුණු කිරීමට සහ ආර්ද්‍රතාවය අඩු කිරීමට ප්‍රමාණවත් ශාක පරතරයක් පවත්වා ගැනීම, එමඟින් දිලීර වර්ධනය වීම වළක්වයි.</li>
+                <li><span class="bold">වසුන් යෙදීම:</span> පස ඉසීම සහ රෝගකාරක පැතිරීම අවම කිරීම සඳහා සහල් පිදුරු හෝ ප්ලාස්ටික් වියන් භාවිතා කිරීම.</li>
+                <li><span class="bold">රෝගවලින් තොර බීජ:</span> සහතික කළ බීජ භාවිතා කිරීම හෝ රෝගකාරක ඉවත් කිරීමට බීජ උණු වතුරෙන් (50-55°C) ප්‍රතිකාර කිරීම.</li>
+            </ul>
+        </div>
+
+        <!-- Chemical Methods -->
+        <div class="premium-card chemical">
+            <h2><i class="fas fa-flask"></i> මිරිස්වල ඇන්ත්‍රැක්නෝස් රෝගය සඳහා රසායනික පාලන ක්‍රම</h2>
+            
+            <p><span class="bold">රෝග්‍ය වළක්වාගැනීමට:</span></p>
+            <ul>
+                <li><span class="bold">බීජ ප්‍රතිකාර:</span> රෝගය මුල් අවධියේදී පැතිරීම වැළැක්වීම සඳහා වගා කිරීමට පෙර සුදුසු දිලීර නාශක සමඟ බීජ ප්‍රතිකාර කරන්න.</li>
+                <li><span class="bold">උදාහරණ:</span> තිරාම් (Thiram) හෝ කැප්ටාන් (Captan)</li>
+            </ul>
+            
+            <p><span class="bold">ඇන්ත්‍රැක්නෝස් (Anthracnose) පාලනය රසායනික සඳහා දිලීර නාශක:</span></p>
+            
+            <p><span class="bold">ක්ලෝරෝතැලෝනිල් (Chlorothalonil):</span></p>
+            <ul>
+                <li><span class="bold">මාත්‍රාව:</span> සාමාන්‍යයෙන් වතුර ලීටරයකට ග්‍රෑම් 2-2.5 පමණ.</li>
+                <li>රෝගයේ පළමු ලක්ෂණ මතු වූ විට හෝ රෝග වර්ධනයට හිතකර කාලගුණික තත්ත්වයන් (ඉහළ ආර්ද්‍රතාවය, නිතර වැසි) ඇති විට ඉසීම ආරම්භ කරන්න.</li>
+                <li><span class="bold">වාර ගණන:</span> රෝග පීඩනය සහ කාලගුණික තත්ත්වයන් අනුව දින 7-10 කට වරක් නැවත යොදන්න.</li>
+            </ul>
+            
+            <p><span class="bold">මැන්කොසෙබ් (Mancozeb):</span></p>
+            <ul>
+                <li><span class="bold">මාත්‍රාව:</span> සාමාන්‍යයෙන් වතුර ලීටරයකට ග්‍රෑම් 2.5-3 පමණ.</li>
+                <li><span class="bold">යෙදීම:</span> විශේෂයෙන් අධික ආර්ද්‍රතාවය සහ වර්ෂාපතිනය ඇති කාලවලදී ආරක්ෂිත ඉසින ලෙස යොදන්න.</li>
+                <li><span class="bold">වාර ගණන:</span> දින 7-10 කට වරක් නැවත යොදන්න.</li>
+            </ul>
+            
+            <p><span class="bold">තඹ පදනම් වූ දිලීර නාශක (උදා: තඹ ඔක්සික්ලෝරයිඩ් (Copper Oxychloride)):</span></p>
+            <ul>
+                <li><span class="bold">මාත්‍රාව:</span> සාමාන්‍යයෙන් වතුර ලීටරයකට ග්‍රෑම් 3-4 පමණ.</li>
+                <li>රෝග ලක්ෂණ මතු වූ විට හෝ වැළැක්වීමේ පියවරක් ලෙස යොදන්න.</li>
+                <li><span class="bold">වාර ගණන:</span> සෑම දින 7-10 කට වරක් නැවත යොදන්න.</li>
+            </ul>
+            
+            <p><span class="bold">පද්ධතිමය දිලීර නාශක (උදා: ටෙබුකොනසෝල් (Tebuconazole), ප්‍රොපිකොනසෝල් (Propiconazole)):</span></p>
+            <ul>
+                <li><span class="bold">මාත්‍රාව:</span> ලේබලයේ ඇති උපදෙස් ප්‍රවේශමෙන් අනුගමනය කරන්න (සාමාන්‍යයෙන් වතුර ලීටරයකට මිලි ලීටර් 0.5-1 පමණ).</li>
+                <li>ස්ථාපිත ආසාදන පාලනය කිරීමේදී පද්ධතිමය දිලීර නාශක වඩාත් ඵලදායී විය හැකිය.</li>
+                <li><span class="bold">වාර ගණන:</span> අවශ්‍ය පරිදි දින 10-14 කට වරක් නැවත යොදන්න.</li>
+            </ul>
+            
+            <p><span class="bold">යෙදුම් මාර්ගෝපදේශ:</span></p>
+            <ul>
+                <li><span class="bold">වේලාව:</span> ඔබේ ප්‍රදේශයේ ඇන්ත්‍රැක්නෝස් (Anthracnose) නැවත නැවතත් ඇතිවන ගැටලුවක් නම් හෝ කාලගුණික තත්ත්වයන් රෝගයට හිතකර නම් පමණක් ඉසීම ආරම්භ කරන්න.</li>
+                <li><span class="bold">ආවරණය:</span> පත්‍රවල දෙපස සහ පලතුරු ඇතුළුව සියලුම ශාක කොටස් හොඳින් ආවරණය වන බවට සහතික වන්න.</li>
+                <li><span class="bold">ජලයේ ගුණාත්මකභාවය:</span> ඉසීම සඳහා පිරිසිදු ජලය භාවිතා කරන්න.</li>
+                <li><span class="bold">ඉසින පරිමාව:</span> ප්‍රමාණවත් ආවරණයක් සහතික කිරීම සඳහා ශාක ප්‍රමාණය සහ ඝනත්වය අනුව ඉසින පරිමාව සකස් කරන්න.</li>
+                <li><span class="bold">කාලගුණික තත්ත්වයන්:</span> වැසි කාලවලදී හෝ යෙදීමෙන් ටික වේලාවකට පසු වැසි අපේක්ෂා කරන විට ඉසීමෙන් වළකින්න. වාෂ්පීකරණය අවම කිරීමට සහ අවශෝෂණය උපරිම කිරීමට දවසේ සිසිල් කාලයන් තුල ඉසින්න(උදෑසන හෝ හවස).</li>
+            </ul>
+        </div>
+
+        <!-- Safety Card -->
+        <div class="premium-card caution">
+            <h2><i class="fas fa-exclamation-triangle"></i> ආරක්ෂක පියවර</h2>
+            <ul>
+                <li><span class="bold">පුද්ගලික ආරක්ෂක උපකරණ (PPE):</span> දිලීර නාශක හැසිරවීමේදී සහ යෙදීමේදී සෑම විටම අත්වැසුම්, වෙස් මුහුණු සහ ඇස් ආරක්ෂා කිරීම වැනි සුදුසු PPE පළඳින්න.</li>
+                <li><span class="bold">නැවත යෙදීමේ කාලාන්තරය (REI):</span> ප්‍රතිකාර කළ ප්‍රදේශයට නැවත යෙදීමට පෙර නිෂ්පාදන ලේබලයේ දක්වා ඇති නැවත යොදන කාලය පරීක්ෂා කරන්න.</li>
+                <li><span class="bold">අස්වැන්න නෙළීමට පෙර කාලය (PHI):</span> පළිබෝධනාශක අපද්‍රව්‍ය ආරක්ෂිත සීමාවන් තුළ ඇති බව සහතික කිරීම සඳහා අස්වැන්න නෙළීමට පෙර කාලයට අනුගත වන්න.</li>
+                <li><span class="bold">ගබඩා කිරීම:</span> පළිබෝධනාශක ළමයින්ට සහ සතුන්ට ළඟා විය නොහැකි ආරක්ෂිත ස්ථානයක ගබඩා කරන්න.</li>
+            </ul>
+        </div>
+
+        <!-- Additional Info Card -->
+        <div class="premium-card">
+            <h2><i class="fas fa-info-circle"></i> වැඩිදුර තොරතුරු</h2>
+            <ul>
+                <li>මෙම රෝගය ඇති කරන්නේ කොලෙටොට්‍රිකම් (Colletotrichum) නම් දිලීර වර්ගයකි. විශේෂයෙන්ම කොලෙටොට්‍රිකම් ග්ලෝයොස්පොරොයිඩීස් (C. gloeosporioides) සහ කොලෙටොට්‍රිකම් කැප්සිකි (C. capsici) යන දිලීර වර්ග මගින් මෙය ඇති වේ.</li>
+                <li>මෙම දිලීර මිරිස් පැළෑටිවල ඕනෑම වර්ධන අවස්ථාවකදී, නොමේරූ මෙන්ම ඉදුණු කරල්වලටද, අස්වැන්න නෙළා ගත් පසුවද වැළදිය හැකියි.</li>
+                <li>මෙම දිලීර බීජ වල සහ පැළෑටි කොටස් වල ජීවත් වන අතර, සොලනේසී කුලයේ (Solanaceae) වැනි වෙනත් ශාක වලද ජීවත් විය හැකියි. රෝගී පැල සිටුවීමෙන්ද රෝගය පැතිර යා හැකියි.</li>
+                <li>උණුසුම් සහ තෙත් කාලගුණ තත්ත්වයන් තුළ මෙම දිලීර හොඳින් වර්ධනය වේ. වැසි හෝ ජල සම්පාදන ජලය මගින්ද පැතිර යා හැකියි.</li>
+                <li>ගෙඩිවල මතුපිට තෙතමනය වැඩි වීමෙන් ඇන්ත්‍රැක්නෝස් රෝගයේ තීව්‍රතාවය වැඩි වේ.</li>
+            </ul>
+            
+            <p><span class="bold">වැදගත් කරුණු:</span></p>
+            <ul>
+                <li>මෙම රෝගය මිරිස් ගොවිතැනට විශාල හානියක් සිදු කරන රෝගයකි.</li>
+                <li>රෝගය වැළැක්වීම සඳහා හොඳ බීජ සහ නිරෝගී පැළ භාවිතා කිරීම වැදගත් වේ.</li>
+                <li>ක්ෂේත්‍රයේ ජලය බැස යාම හොඳින් සහතික කිරීම සහ පැළෑටි අතර ප්‍රමාණවත් ඉඩක් තැබීම රෝගය පැතිරීම අඩු කිරීමට උපකාරී වේ.</li>
+                <li>දිලීර නාශක භාවිතා කිරීම මගින් රෝගය පාලනය කරගත හැකියි.</li>
+                <li>රෝගය වැළඳුන ගෙඩි ක්ෂේත්‍රයෙන් ඉවත් කර විනාශ කිරීම ඉතා වැදගත් වේ.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        © CropCare. All Rights Reserved.
+    </footer>
+
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const icon = darkModeToggle.querySelector('i');
+            
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // Image Slider with Touch Support
+        const slider = document.getElementById('imageSlider');
+        const slides = document.querySelector('.gallery-slides');
+        const slideCount = document.querySelectorAll('.gallery-slide').length;
+        let currentIndex = 0;
+        let isDragging = false;
+        let startPosX = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID;
+        let autoScrollInterval;
+
+        // Auto-scroll
+        function startAutoScroll() {
+            autoScrollInterval = setInterval(() => {
+                if (!isDragging) {
+                    currentIndex = (currentIndex + 1) % slideCount;
+                    updateSliderPosition();
+                }
+            }, 5000);
+        }
+
+        function updateSliderPosition() {
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        // Touch events
+        slider.addEventListener('touchstart', touchStart);
+        slider.addEventListener('touchmove', touchMove);
+        slider.addEventListener('touchend', touchEnd);
+
+        // Mouse events for desktop testing
+        slider.addEventListener('mousedown', touchStart);
+        slider.addEventListener('mousemove', touchMove);
+        slider.addEventListener('mouseup', touchEnd);
+        slider.addEventListener('mouseleave', touchEnd);
+
+        function touchStart(e) {
+            isDragging = true;
+            startPosX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            clearInterval(autoScrollInterval);
+            cancelAnimationFrame(animationID);
+        }
+
+        function touchMove(e) {
+            if (isDragging) {
+                const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                currentTranslate = prevTranslate + currentPosition - startPosX;
+            }
+        }
+
+        function touchEnd() {
+            isDragging = false;
+            const movedBy = currentTranslate - prevTranslate;
+
+            if (movedBy < -50 && currentIndex < slideCount - 1) {
+                currentIndex += 1;
+            } else if (movedBy > 50 && currentIndex > 0) {
+                currentIndex -= 1;
+            }
+
+            updateSliderPosition();
+            prevTranslate = currentIndex * -slider.offsetWidth;
+            startAutoScroll();
+        }
+
+        // Pinch-to-zoom would require additional libraries like Hammer.js for proper implementation
+        // This is a simplified version that allows zooming
+        slider.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const img = document.querySelector('.gallery-slide:nth-child(' + (currentIndex + 1) + ') img');
+            const scale = e.deltaY > 0 ? 0.9 : 1.1;
+            img.style.transform = img.style.transform ? `scale(${parseFloat(img.style.transform.replace('scale(', '')) * scale})` : `scale(${scale})`;
+        }, { passive: false });
+
+        // Initialize
+        startAutoScroll();
+    </script>
+</body>
+</html>
