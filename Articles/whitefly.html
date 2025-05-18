@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>සුදු මැස්සන් | CropCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #14919b;
+            --accent: #ff7e33;
+            --glass: rgba(255, 255, 255, 0.85);
+            --text: #333;
+            --bg: linear-gradient(135deg, #f5f9ff 0%, #e8f4ff 100%);
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --card-border: rgba(255, 255, 255, 0.3);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            
+            /* Card colors */
+            --symptoms-bg: linear-gradient(to bottom right, rgba(255, 249, 244, 0.9), rgba(255, 255, 255, 0.95));
+            --symptoms-title: #e65100;
+            --prevention-bg: linear-gradient(to bottom right, rgba(232, 245, 233, 0.9), rgba(255, 255, 255, 0.95));
+            --prevention-title: #1b5e20;
+            --organic-bg: linear-gradient(to bottom right, rgba(241, 248, 233, 0.9), rgba(255, 255, 255, 0.95));
+            --organic-title: #33691e;
+            --chemical-bg: linear-gradient(to bottom right, rgba(255, 235, 238, 0.9), rgba(255, 255, 255, 0.95));
+            --chemical-title: #b71c1c;
+            --resource-bg: linear-gradient(to bottom right, rgba(227, 242, 253, 0.9), rgba(255, 255, 255, 0.95));
+            --resource-title: #0d47a1;
+            --caution-bg: linear-gradient(to bottom right, rgba(255, 243, 205, 0.9), rgba(255, 255, 255, 0.95));
+        }
+
+        .dark-mode {
+            --primary: #f5f7fa;
+            --secondary: #1abc9c;
+            --accent: #ff9a3c;
+            --glass: rgba(30, 30, 30, 0.85);
+            --text: #f0f0f0;
+            --bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --card-bg: rgba(46, 46, 46, 0.8);
+            --card-border: rgba(255, 255, 255, 0.05);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            
+            /* Dark mode card colors */
+            --symptoms-bg: linear-gradient(to bottom right, rgba(51, 40, 33, 0.9), rgba(45, 45, 45, 0.95));
+            --symptoms-title: #ff8a65;
+            --prevention-bg: linear-gradient(to bottom right, rgba(26, 46, 26, 0.9), rgba(45, 45, 45, 0.95));
+            --prevention-title: #81c784;
+            --organic-bg: linear-gradient(to bottom right, rgba(46, 58, 30, 0.9), rgba(45, 45, 45, 0.95));
+            --organic-title: #9ccc65;
+            --chemical-bg: linear-gradient(to bottom right, rgba(61, 39, 39, 0.9), rgba(45, 45, 45, 0.95));
+            --chemical-title: #ef9a9a;
+            --resource-bg: linear-gradient(to bottom right, rgba(26, 42, 58, 0.9), rgba(45, 45, 45, 0.95));
+            --resource-title: #90caf9;
+            --caution-bg: linear-gradient(to bottom right, rgba(70, 63, 46, 0.9), rgba(45, 45, 45, 0.95));
+        }
+
+        body {
+            font-family: 'Noto Sans Sinhala', 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            transition: all 0.5s ease;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Animated Luxury Header */
+        .luxury-header {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 0 0 20px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .luxury-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            100% {
+                left: 100%;
+            }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 0;
+        }
+
+        /* Enhanced Image Gallery */
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 1.5rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            touch-action: pan-y pinch-zoom;
+        }
+
+        .gallery-slides {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+            height: 350px;
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            touch-action: pan-y pinch-zoom;
+        }
+
+        /* Gallery Dots Navigation */
+        .gallery-dots {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .gallery-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.2);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .gallery-dot.active {
+            background-color: var(--secondary);
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .dark-mode-toggle i {
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        /* Content Styling */
+        ul {
+            list-style-type: disc;
+            padding-left: 1.2rem;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 0.6rem;
+            font-weight: 400;
+        }
+
+        .bold {
+            font-weight: 500;
+        }
+
+        /* Base Card Styles */
+        .card {
+            border-radius: 12px;
+            padding: 20px;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            font-family: 'Noto Sans Sinhala', 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .card-title i {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.3rem;
+            color: var(--text);
+        }
+
+        .info-dots {
+            position: absolute;
+            bottom: 8px;
+            right: 15px;
+            display: flex;
+        }
+        
+        .dot {
+            width: 6px;
+            height: 6px;
+            background-color: currentColor;
+            border-radius: 50%;
+            margin: 0 3px;
+            opacity: 0.3;
+        }
+
+        /* Symptoms Card */
+        .symptoms-card {
+            background: var(--symptoms-bg);
+        }
+        
+        .symptoms-title {
+            color: var(--symptoms-title);
+        }
+
+        /* Prevention Card */
+        .prevention-card {
+            background: var(--prevention-bg);
+        }
+        
+        .prevention-title {
+            color: var(--prevention-title);
+        }
+
+        /* Organic Card */
+        .organic-card {
+            background: var(--organic-bg);
+        }
+        
+        .organic-title {
+            color: var(--organic-title);
+        }
+
+        /* Chemical Card */
+        .chemical-card {
+            background: var(--chemical-bg);
+        }
+        
+        .chemical-title {
+            color: var(--chemical-title);
+        }
+
+        /* Resource Card */
+        .resource-card {
+            background: var(--resource-bg);
+        }
+        
+        .resource-title {
+            color: var(--resource-title);
+        }
+
+        /* Caution Card */
+        .caution-card {
+            background: var(--caution-bg);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .gallery-slides {
+                height: 250px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+            
+            .card-title {
+                font-size: 1.4rem;
+                padding-left: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle" id="darkModeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Animated Luxury Header -->
+    <div class="luxury-header">
+        <div class="container">
+            <h1><i class="fas fa-bug"></i> සුදු මැස්සන් <small style="font-size: 1rem; opacity: 0.8;">White Fly</small></h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Premium Image Gallery with Dots -->
+        <div class="gallery-container" id="imageSlider">
+            <div class="gallery-slides">
+                <div class="gallery-slide">
+                    <img src="https://eranda47.github.io/CropCare/Images/Whitefly/whitefly1cc.webp" alt="සුදු මැස්සන් - රෝග ලක්ෂණ 1">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://eranda47.github.io/CropCare/Images/Whitefly/whitefly4cc.webp" alt="සුදු මැස්සන් - රෝග ලක්ෂණ 2">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://eranda47.github.io/CropCare/Images/Whitefly/whitefly3.webp" alt="සුදු මැස්සන් - රෝග ලක්ෂණ 3">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://eranda47.github.io/CropCare/Images/Whitefly/whitefly2.webp" alt="සුදු මැස්සන් - රෝග ලක්ෂණ 4">
+                </div>
+            </div>
+        </div>
+        <div class="gallery-dots" id="galleryDots"></div>
+
+        <!-- Symptoms Card -->
+        <div class="card symptoms-card">
+            <div class="info-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h2 class="card-title symptoms-title"><i class="fas fa-search"></i> රෝග ලක්ෂණ</h2>
+            <ul>
+                <li>සුදු මැස්සන් කොළවල යුෂ උරා බොන නිසා කොළවල කහ පැහැති ලප ඇති වේ.</li>
+                <li>සුදු මැස්සන් මී පැණි වැනි ද්‍රවයක් පිට කරන අතර, එය මත කළු පුස් දිලීර වර්ධනය විය හැක.</li>
+                <li>කොළ ඇඹරීම හෝ කුසලාන හැඩයකට (cupping shape) විකෘති විය හැක.</li>
+                <li>ශාකයේ වර්ධනය අඩාල වේ. විශේෂයෙන් තරුණ පැළවල වර්ධනය අඩාල වේ.</li>
+                <li>පලතුරු විකෘති වීම, වර්ණය වෙනස් වීම හෝ ප්‍රමාණය අඩු වීම නිසා අස්වැන්න සහ ගුණාත්මක භාවයට බලපෑම් ඇති වේ.</li>
+                <li>දරුණු අවස්ථාවලදී, විශාල හානි සහ පෝෂක නැතිවීම නිසා ශාක මැලවී මිය යා හැක.</li>
+                <li>සුදු මැස්සන් ශාක වෛරස් සම්ප්‍රේෂණය කරන වාහකයන් වන අතර, කහ මොසෙයික් (yellow mosaic) සහ කොළ රැලි වීම (leaf curl) වැනි රෝග ඇති විය හැකි අතර, එමගින් බෝග අස්වැන්නට දැඩි බලපෑම් ඇති විය හැක.</li>
+            </ul>
+        </div>
+
+        <!-- Prevention Card -->
+        <div class="card prevention-card">
+            <div class="info-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h2 class="card-title prevention-title"><i class="fas fa-shield-alt"></i> සුදු මැස්සාගේ හානියෙන් වැළකීමට පියවර</h2>
+            
+            <p><span class="bold">බෝග මාරුව (Crop Rotation):</span></p>
+            <ul>
+                <li>එකම බෝගය දිගින් දිගටම එකම භූමියහහි සිටුවීමෙන් වළකින්න. සුදු මැස්සන්ගේ ජීවන චක්‍රය බිඳ දැමීම සඳහා බඩ ඉරිඟු වැනි ඔවුන් අකමැති බෝග සමඟ මාරුවෙන් මාරුවට වගා කරන්න.</li>
+            </ul>
+            
+            <p><span class="bold">වැට බෝග (Border crops):</span></p>
+            <ul>
+                <li>කුඹුරේ මායිම් වල උසට වැඩෙන බඩ ඉරිඟු, සෝර්ගම් (sorghum) හෝ මුතු මෙනේරි (pearl millet), සන් හෙම්ප්, වැනි බෝග ඝන පේළිවල සිටුවන්න.</li>
+            </ul>
+            
+            <p><span class="bold">බෝග අතර පරතරය:</span></p>
+            <ul>
+                <li>සිටුවීමේදී පැළ අතර නිවැරදි පරතරයක් තබන්න.</li>
+            </ul>
+            
+            <p><span class="bold">නව පැළ පරීක්ෂා කිරීම:</span></p>
+            <ul>
+                <li>අලුතින් මිලදී ගන්නා හෝ බද්ධ කල පැළවල සුදු මැස්සන්ගේ සලකුණු තිබේදැයි නිරන්තරයෙන් පරීක්ෂා කරන්න.</li>
+            </ul>
+            
+            <p><span class="bold">කහ මැලියම් උගුල් (Yellow Sticky Traps):</span></p>
+            <ul>
+                <li>සුදු මැස්සන් කහ පැහැයට ආකර්ෂණය වන බැවින්, කුඹුර වටා හෝ ගස් කඳන් වටා ග්‍රීස් ආලේප කළ කහ පොලිතින් තහඩු තබන්න.</li>
+            </ul>
+            
+            <p><span class="bold">පොහොර ප්‍රමාණය:</span></p>
+            <ul>
+                <li>නිර්දේශිත පොහොර ප්‍රමණය පමාණක් යොදන්න.</li>
+            </ul>
+            
+            <p><span class="bold">පුළුල් පරාස කෘමිනාශක භාවිතයෙන් වළකින්න:</span></p>
+            <ul>
+                <li>ප්‍රයෝජනවත් කෘමීන්ට බලපෑම් කළ හැකි විශේෂිත නොවන කෘමිනාශක (broad-spectrum insecticides) භාවිතා නොකරන්න.</li>
+            </ul>
+            
+            <p><span class="bold">බිත්තර හෝ කීටයන් සහිත කොළ ඉවත් කිරීම:</span></p>
+            <ul>
+                <li>බිත්තර හෝ කීටයන් සහිත කොළ හමු වුවහොත් ඒවා ඉවත් කරන්න.</li>
+            </ul>
+            
+            <p><span class="bold">වල් පැලෑටි පාලනය:</span></p>
+            <ul>
+                <li>කුඹුරේ සහ ඒ අවට වල් පැලෑටි සහ විකල්ප ධාරක පාලනය කරන්න.</li>
+            </ul>
+            
+            <p><span class="bold">ක්ෂේත්‍රය පිරිසිදුව තබාගන්න:</span></p>
+            <ul>
+                <li>අස්වැන්න නෙලීමෙන් පසු කුඹුරෙන් හෝ හරිතාගාරයෙන් ශාක අපද්‍රව්‍ය ඉවත් කරන්න.</li>
+            </ul>
+            
+            <p><span class="bold">UV අවශෝෂණය කරන හරිතාගාර පටල භාවිතය:</span></p>
+            <ul>
+                <li>UV අවශෝෂණය කරන හරිතාගාර පටල භාවිතය (UV-absorbing greenhouse plastic films) සුදු මැස්සන්ගේ පැතිරීම අඩු කළ හැක.</li>
+            </ul>
+        </div>
+
+        <!-- Organic Methods -->
+        <div class="card organic-card">
+            <div class="info-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h2 class="card-title organic-title"><i class="fas fa-leaf"></i> සුදු මැස්සා පාලනයට කාබනික පාලන ක්‍රම</h2>
+            
+            <p><span class="bold">ස්වාභාවික සතුරන් දිරිමත් කිරීම:</span></p>
+            <ul>
+                <li>ලේඩි බග් (Coccinellidae), ලේස් වින්ග්ස් (lacewings) සහ පරපෝෂිත බඹරුන් (Encarsia spp.) වැනි ස්වාභාවික සතුරන් වගා බිමට හඳුන්වා දෙන්න.</li>
+            </ul>
+            
+            <p><span class="bold">නීම් තෙල් (කොහොඹ ඇට නිස්සාරකය):</span></p>
+            <ul>
+                <li>නීම් තෙල් මිලි ලීටර් 10 ක් සහ සබන් කුඩු ග්‍රෑම් 5 ක් වතුර ලීටර් 1 කට මිශ්‍ර කරන්න. සුදු මැස්සන් ඉන්න පැළෑටිවලට මේ මිශ්‍රණය ඉසින්න. මේක ස්වාභාවික සතුරන්ට හානිකර නැති නිසා සුදු මැස්සන්ට එරෙහිව හොඳින් වැඩ කරනවා.</li>
+            </ul>
+            
+            <p><span class="bold">සුදුළූණු හෝ මිරිස් සාරය:</span></p>
+            <ul>
+                <li>සුදුළූණු හෝ මිරිස් සාරය යොදාගෙන ඉසින දියර සාදා, වගාවට ඉසින්න.</li>
+            </ul>
+            
+            <p><span class="bold">කහ පැහැති ඇලෙන උගුල් (Yellow Sticky Traps):</span></p>
+            <ul>
+                <li>කහ පැහැති ඇලෙන උගුල් යොදාගෙන වැඩිහිටි සුදු මැස්සන් අල්ලා ගන්න. මේවා මිල අඩුයි, භාවිතා කරන්නත් පහසුයි.</li>
+            </ul>
+            
+            <p><span class="bold">වසුන් (Mulching):</span></p>
+            <ul>
+                <li>වල් පැලෑටි වර්ධනය වීම වැළැක්වීමට කාබනික වියන් ආවරණ යොදන්න. වල් පැලෑටි සුදු මැස්සන්ට වාසස්ථානයක් විය හැකියි.</li>
+            </ul>
+        </div>
+
+        <!-- Chemical Methods -->
+        <div class="card chemical-card">
+            <div class="info-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h2 class="card-title chemical-title"><i class="fas fa-flask"></i> සුදු මැස්සා පාලනයට රසායනික පාලන ක්‍රම</h2>
+            
+            <p><span class="bold">ඉමිඩක්ලොප්‍රිඩ් (Imidacloprid):</span></p>
+            <ul>
+                <li>සාමාන්‍යයෙන් වතුර ලීටරයකට මිලිලීටර් 0.5 සිට 0.75 දක්වා ප්‍රමාණයක් භාවිතා කරන්න.</li>
+                <li>පද්ධතිමය කෘමිනාශකයක් වේ. ශාකයේ කොළ වලට ඉසින්න. විශේෂයෙන් සුදු මැස්සන් බහුලව සිටින කොළ වල යටි පැත්තට හොඳින් ඉසින්න. පසට වත් කිරීමෙන් (soil drench) පද්ධතිය තුළට උරා ගැනීම සඳහා ද භාවිතා කළ හැක.</li>
+                <li>සුදු මැස්සන්ගේ ගහනය යම් සීමාවකට පැමිණි විට යොදන්න. ආසාදනයේ බරපතලකම සහ නිෂ්පාදන ලේබලයේ නිර්දේශයන් අනුව දින 7-14 කට වරක් නැවත යෙදීම් අවශ්‍ය විය හැකිය. ප්‍රතිරෝධය වර්ධනය වීම වැළැක්වීම සඳහා අධික ලෙස භාවිතා කිරීමෙන් වළකින්න.</li>
+                <li>එළවළු වර්ග, මිරිස්, පලතුරු වර්ග, අලංකාර පැලෑටි.</li>
+                <li>මෙම රසායනිකය ශාක මගින් උරාගෙන සුදු මැස්සන් ආහාරයට ගන්නා විට ඒවා විනාශ කරයි. මෙය ඵලදායී කෘමිනාශකයක් වුවද, ප්‍රයෝජනවත් කෘමීන්ට හානි සිදු විය හැකි බැවින් ප්‍රවේශමෙන් භාවිතා කළ යුතුය.</li>
+            </ul>
+            
+            <p><span class="bold">ඇසිටමිප්‍රිඩ් (Acetamiprid):</span></p>
+            <ul>
+                <li>නිෂ්පාදන ලේබලයේ උපදෙස් අනුගමනය කරන්න. සාමාන්‍යයෙන් වතුර ලීටරයකට ග්‍රෑම් 0.2 සිට 0.4 දක්වා ප්‍රමාණයක් භාවිතා කරන්න.</li>
+                <li>කොළ වලට ඉසින්න. කොළ වල යටි පැත්ත ඇතුළුව හොඳින් ආවරණය වන පරිදි ඉසින්න.</li>
+                <li>සුදු මැස්සන් දක්නට ලැබුණු විට යොදන්න. ආසාදන මට්ටම සහ නිෂ්පාදන මාර්ගෝපදේශ අනුව අවශ්‍ය නම් දින 7-10 ක පරතරයකින් නැවත යෙදිය හැක.</li>
+                <li>විවිධ එළවළු, පලතුරු සහ තේ වගාව සඳහා සුදුසු වේ.</li>
+            </ul>
+            
+            <p><span class="bold">තයමෙතොක්සැම් (Thiamethoxam):</span></p>
+            <ul>
+                <li>සාමාන්‍යයෙන් වතුර ලීටරයකට ග්‍රෑම් 0.2 සිට 0.3 දක්වා ප්‍රමාණයක් භාවිතා කරන්න. සෑම විටම නිෂ්පාදන ලේබලය පරීක්ෂා කරන්න.</li>
+                <li>කොළ වලට ඉසින්න (Foliar spray) හෝ පසට වත් කරන්න (soil drench). කොළ වලට ඉසින විට හොඳින් ආවරණය වන පරිදි ඉසින්න.</li>
+                <li>සුදු මැස්සන් දක්නට ලැබුණු විට යොදන්න. ආසාදනය සහ නිෂ්පාදන උපදෙස් අනුව අවශ්‍ය නම් දින 10-14 ක පරතරයකින් නැවත යෙදිය හැක.</li>
+                <li>පත්‍ර සහිත එළවළු, තක්කාලි, අර්තාපල් සහ බෝංචි වගාවන් සඳහා සුදුසු වේ.</li>
+                <li>තයමෙතොක්සැම් යනු පද්ධතිමය කෘමිනාශකයකි.</li>
+            </ul>
+            
+            <p><span class="bold">බුප්‍රොෆෙසින් (Buprofezin):</span></p>
+            <ul>
+                <li>වතුර ලීටරයකට මිලිලීටර් 0.5 සිට 1 දක්වා (ලේබලය පරීක්ෂා කරන්න).</li>
+                <li>කොළ වලට ඉසින්න. ශාකයට හොඳින් ආවරණය වන පරිදි ඉසීම වැදගත් වේ.</li>
+                <li>කීටයන් (කුඩා සුදු මැස්සන්) සිටින විට යොදන්න. මෙය කීට අවධියට එරෙහිව වඩාත් ඵලදායී වේ. අවශ්‍ය නම් දින 10-14 කට පසු නැවත යොදන්න.</li>
+                <li>එළවළු (තක්කාලි, ගම්මිරිස්, පිපිඤ්ඤා), පැඟිරි සහ කපු වගාව සඳහා සුදුසු වේ.</li>
+                <li>බුප්‍රොෆෙසින් යනු කෘමි වර්ධක නියාමකයකි (Insect growth regulator - IGR). එය කීටයන්ගේ අවදියට හානිකර වේ.</li>
+            </ul>
+            
+            <p><span class="bold">පයිරිප්‍රොක්සිෆෙන් (Pyriproxyfen):</span></p>
+            <ul>
+                <li>වතුර ලීටරයකට ආසන්න වශයෙන් මිලිලීටර් 0.5 සිට 1 දක්වා.</li>
+                <li>කොළ වලට ඉසින්න (Foliar spray).</li>
+                <li>කීටයන් සිටින විට යොදන්න. අවශ්‍ය නම් දින 10-14 කට පසු නැවත යොදන්න.</li>
+                <li>එළවළු, පලතුරු සහ කපු වගාව සඳහා සුදුසු වේ.</li>
+                <li>පයිරිප්‍රොක්සිෆෙන් ද කෘමි වර්ධක නියාමකයකි (Insect growth regulator).</li>
+            </ul>
+            
+            <p><span class="bold">මීට අමතරව මෙම කෘමි නාශකද භාවිතා කළ හැක:</span></p>
+            <ul>
+                <li><span class="bold">චෙස් / Chess:</span> රසායනික නාමය: පයිමෙට්‍රොසීන් 50% ඩබ්ජි</li>
+                <li><span class="bold">වර්ටැකෝ 40 ඩබ් ජී / Virtako 40 WG:</span> රසායනික නාමය: ක්ලෝරැන්ටැනිලිප්‍රොල් 20% + තයමෙතොක්සාම් 20% ඩබ් ජී</li>
+                <li><span class="bold">ට්‍රාන්ස්ෆෝම් / Transform:</span> රසායනික නාමය: සල්ෆොක්සෆ්ලෝ 50% (බර අනුව) ඩබ්.ජී.</li>
+            </ul>
+            
+            <p><span class="bold">කෘමි නාශක සඳහා පොදු නිර්දේශ:</span></p>
+            <ul>
+                <li>ඉසින විට උදාසීන pH අගයක් සහිත පිරිසිදු ජලය භාවිතා කරන්න.</li>
+                <li>සුදු මැස්සන් වාසය කරන කොළ වල යටි පැත්ත ඇතුළු සියලුම ශාක කොටස් හොඳින් ආවරණය වන පරිදි ඉසින්න.</li>
+                <li>වැසි ඇති විට හෝ අධික වර්ෂාවක් අපේක්ෂා කරන විට ඉසීමෙන් වළකින්න. වාෂ්පීකරණය අවම කිරීම සහ දිවා කාලයේ ක්‍රියාකාරී වන ප්‍රයෝජනවත් කෘමීන්ට (මී මැස්සන් වැනි) හානි වීම වැළැක්වීම සඳහා උදෑසන හෝ සවස් කාලයේ ඉසින්න.</li>
+                <li>සුදු මැස්සන්ගේ ජනගහනය තුළ ප්‍රතිරෝධය වර්ධනය වීම වැළැක්වීම සඳහා විවිධ ක්‍රියාකාරීත්වයේ ආකාර (modes of action) ඇති කෘමිනාශක මාරුවෙන් මාරුවට භාවිතා කරන්න.</li>
+            </ul>
+        </div>
+
+        <!-- Caution Card -->
+        <div class="card caution-card">
+            <div class="info-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h2 class="card-title"><i class="fas fa-exclamation-triangle"></i> වැදගත් කරුණු</h2>
+            <ul>
+                <li><span class="bold">ප්‍රයෝජනවත් කෘමීන්:</span> කෘමිනාශක මගින් ප්‍රයෝජනවත් කෘමීන්ට ඇතිවන බලපෑම පිළිබඳව සැලකිලිමත් වන්න. හැකි සෑම විටම තෝරාගත් කෘමිනාශක භාවිතා කර ඒවා ප්‍රවේශමෙන් යොදන්න.</li>
+                <li><span class="bold">ශාක විෂවීම:</span> සමහර කෘමිනාශක ඇතැම් ශාක සඳහා හානිකර විය හැක. සෑම විටම මුළු බෝගයටම යෙදීමට පෙර කුඩා ප්‍රදේශයක පරීක්ෂා කරන්න.</li>
+                <li><span class="bold">අස්වනු නෙළීමට පෙර කාලය (Pre-Harvest Interval - PHI):</span> ඔබේ වගාවේ ආරක්ෂාව සහතික කිරීම සඳහා අවසන් වරට ඉසීම සහ අස්වනු නෙලීම අතර කාල පරතරය කෙරෙහි අවධානය යොමු කරන්න.</li>
+            </ul>
+        </div>
+
+        <!-- Additional Info Card -->
+        <div class="card resource-card">
+            <div class="info-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h2 class="card-title resource-title"><i class="fas fa-info-circle"></i> අමතර කරුණු</h2>
+            <ul>
+                <li>සුදු මැස්සන් එළිමහනේ සහ හරිතාගාර තුළ වගා කරන විවිධ බෝග වලට පොදු උවදුරක් වේ.</li>
+                <li>ඔවුන්ගේ ප්‍රමාණය මිලිමීටර් 0.8-1 පමණ වන අතර, ශරීරය සහ පියාපත් යුගල සුදු සිට කහ පැහැති පිටි සහිත ඉටිමය ස්‍රාවයකින් ආවරණය වී ඇත.</li>
+                <li>බිත්තර කොළවල යටි පැත්තේ දමයි.</li>
+                <li>නිම්ෆාවන් (Nymphs) කහ සිට සුදු, පැතලි, ඕවලාකාර සහ ලා කොළ පැහැයෙන් යුක්ත වේ.</li>
+                <li>වැඩිහිටි සුදු මැස්සන්ට දින කිහිපයකට වඩා ධාරක ශාකයකින් තොරව ජීවත් විය නොහැක.</li>
+                <li>ඔවුන් බොහෝ විට කොළවල යටි පැත්තේ දක්නට ලැබෙන අතර, බාධා සිදුවුවොත් ඉහළට පැමිණේ.</li>
+                <li>සමහර සුදු මැස්සන් තක්කාලි කහ කොළ රැලි වෛරසය (tomato yellow leaf curl virus) හෝ මඤ්ඤොක්කා දුඹුරු ඉරි වෛරසය (cassava brown streak virus) වැනි වෛරස් සම්ප්‍රේෂණය කරයි.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        © KrushiMie. All Rights Reserved.
+    </footer>
+
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const icon = darkModeToggle.querySelector('i');
+            
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // Image Slider with Touch Support and Dots
+        const slider = document.getElementById('imageSlider');
+        const slides = document.querySelector('.gallery-slides');
+        const dotsContainer = document.getElementById('galleryDots');
+        const slideCount = document.querySelectorAll('.gallery-slide').length;
+        let currentIndex = 0;
+        let isDragging = false;
+        let startPosX = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID;
+        let autoScrollInterval;
+
+        // Create dots
+        for (let i = 0; i < slideCount; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('gallery-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                currentIndex = i;
+                updateSliderPosition();
+                updateDots();
+                resetAutoScroll();
+            });
+            dotsContainer.appendChild(dot);
+        }
+
+        // Update dots
+        function updateDots() {
+            const dots = document.querySelectorAll('.gallery-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        // Auto-scroll
+        function startAutoScroll() {
+            autoScrollInterval = setInterval(() => {
+                if (!isDragging) {
+                    currentIndex = (currentIndex + 1) % slideCount;
+                    updateSliderPosition();
+                    updateDots();
+                }
+            }, 5000);
+        }
+
+        function resetAutoScroll() {
+            clearInterval(autoScrollInterval);
+            startAutoScroll();
+        }
+
+        function updateSliderPosition() {
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        // Touch events
+        slider.addEventListener('touchstart', touchStart);
+        slider.addEventListener('touchmove', touchMove);
+        slider.addEventListener('touchend', touchEnd);
+
+        // Mouse events for desktop testing
+        slider.addEventListener('mousedown', touchStart);
+        slider.addEventListener('mousemove', touchMove);
+        slider.addEventListener('mouseup', touchEnd);
+        slider.addEventListener('mouseleave', touchEnd);
+
+        function touchStart(e) {
+            isDragging = true;
+            startPosX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            clearInterval(autoScrollInterval);
+            cancelAnimationFrame(animationID);
+        }
+
+        function touchMove(e) {
+            if (isDragging) {
+                const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                currentTranslate = prevTranslate + currentPosition - startPosX;
+            }
+        }
+
+        function touchEnd() {
+            isDragging = false;
+            const movedBy = currentTranslate - prevTranslate;
+
+            if (movedBy < -50 && currentIndex < slideCount - 1) {
+                currentIndex += 1;
+            } else if (movedBy > 50 && currentIndex > 0) {
+                currentIndex -= 1;
+            }
+
+            updateSliderPosition();
+            updateDots();
+            prevTranslate = currentIndex * -slider.offsetWidth;
+            resetAutoScroll();
+        }
+
+        // Pinch-to-zoom would require additional libraries like Hammer.js for proper implementation
+        // This is a simplified version that allows zooming
+        slider.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const img = document.querySelector('.gallery-slide:nth-child(' + (currentIndex + 1) + ') img');
+            const scale = e.deltaY > 0 ? 0.9 : 1.1;
+            img.style.transform = img.style.transform ? `scale(${parseFloat(img.style.transform.replace('scale(', '')) * scale})` : `scale(${scale})`;
+        }, { passive: false });
+
+        // Initialize
+        startAutoScroll();
+    </script>
+</body>
+</html>

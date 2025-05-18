@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>දිය මලන්කෑම | CropCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #14919b;
+            --accent: #ff7e33;
+            --glass: rgba(255, 255, 255, 0.85);
+            --text: #333;
+            --bg: linear-gradient(135deg, #f5f9ff 0%, #e8f4ff 100%);
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --card-border: rgba(255, 255, 255, 0.3);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            
+            /* Card colors */
+            --symptoms-bg: linear-gradient(to bottom right, rgba(255, 249, 244, 0.9), rgba(255, 255, 255, 0.95));
+            --symptoms-title: #e65100;
+            --prevention-bg: linear-gradient(to bottom right, rgba(232, 245, 233, 0.9), rgba(255, 255, 255, 0.95));
+            --prevention-title: #1b5e20;
+            --organic-bg: linear-gradient(to bottom right, rgba(241, 248, 233, 0.9), rgba(255, 255, 255, 0.95));
+            --organic-title: #33691e;
+            --chemical-bg: linear-gradient(to bottom right, rgba(255, 235, 238, 0.9), rgba(255, 255, 255, 0.95));
+            --chemical-title: #b71c1c;
+            --resource-bg: linear-gradient(to bottom right, rgba(227, 242, 253, 0.9), rgba(255, 255, 255, 0.95));
+            --resource-title: #0d47a1;
+            --caution-bg: linear-gradient(to bottom right, rgba(255, 243, 205, 0.9), rgba(255, 255, 255, 0.95));
+        }
+
+        .dark-mode {
+            --primary: #f5f7fa;
+            --secondary: #1abc9c;
+            --accent: #ff9a3c;
+            --glass: rgba(30, 30, 30, 0.85);
+            --text: #f0f0f0;
+            --bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --card-bg: rgba(46, 46, 46, 0.8);
+            --card-border: rgba(255, 255, 255, 0.05);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            
+            /* Dark mode card colors */
+            --symptoms-bg: linear-gradient(to bottom right, rgba(51, 40, 33, 0.9), rgba(45, 45, 45, 0.95));
+            --symptoms-title: #ff8a65;
+            --prevention-bg: linear-gradient(to bottom right, rgba(26, 46, 26, 0.9), rgba(45, 45, 45, 0.95));
+            --prevention-title: #81c784;
+            --organic-bg: linear-gradient(to bottom right, rgba(46, 58, 30, 0.9), rgba(45, 45, 45, 0.95));
+            --organic-title: #9ccc65;
+            --chemical-bg: linear-gradient(to bottom right, rgba(61, 39, 39, 0.9), rgba(45, 45, 45, 0.95));
+            --chemical-title: #ef9a9a;
+            --resource-bg: linear-gradient(to bottom right, rgba(26, 42, 58, 0.9), rgba(45, 45, 45, 0.95));
+            --resource-title: #90caf9;
+            --caution-bg: linear-gradient(to bottom right, rgba(70, 63, 46, 0.9), rgba(45, 45, 45, 0.95));
+        }
+
+        body {
+            font-family: 'Noto Sans Sinhala', 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            transition: all 0.5s ease;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Animated Luxury Header */
+        .luxury-header {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 0 0 20px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .luxury-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            100% {
+                left: 100%;
+            }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 0;
+        }
+
+        /* Enhanced Image Gallery */
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 1.5rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            touch-action: pan-y pinch-zoom;
+        }
+
+        .gallery-slides {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+            height: 350px;
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            touch-action: pan-y pinch-zoom;
+        }
+
+        /* Gallery Dots Navigation */
+        .gallery-dots {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .gallery-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.2);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .gallery-dot.active {
+            background-color: var(--secondary);
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .dark-mode-toggle i {
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        /* Content Styling */
+        ul {
+            list-style-type: disc;
+            padding-left: 1.2rem;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 0.6rem;
+            font-weight: 400;
+        }
+
+        .bold {
+            font-weight: 500;
+        }
+
+        /* Base Card Styles */
+        .card {
+            border-radius: 12px;
+            padding: 20px;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            font-family: 'Noto Sans Sinhala', 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .card-title i {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.3rem;
+            color: var(--text);
+        }
+
+        .info-dots {
+            position: absolute;
+            bottom: 8px;
+            right: 15px;
+            display: flex;
+        }
+        
+        .dot {
+            width: 6px;
+            height: 6px;
+            background-color: currentColor;
+            border-radius: 50%;
+            margin: 0 3px;
+            opacity: 0.3;
+        }
+
+        /* Symptoms Card */
+        .symptoms-card {
+            background: var(--symptoms-bg);
+        }
+        
+        .symptoms-title {
+            color: var(--symptoms-title);
+        }
+
+        /* Prevention Card */
+        .prevention-card {
+            background: var(--prevention-bg);
+        }
+        
+        .prevention-title {
+            color: var(--prevention-title);
+        }
+
+        /* Organic Card */
+        .organic-card {
+            background: var(--organic-bg);
+        }
+        
+        .organic-title {
+            color: var(--organic-title);
+        }
+
+        /* Chemical Card */
+        .chemical-card {
+            background: var(--chemical-bg);
+        }
+        
+        .chemical-title {
+            color: var(--chemical-title);
+        }
+
+        /* Resource Card */
+        .resource-card {
+            background: var(--resource-bg);
+        }
+        
+        .resource-title {
+            color: var(--resource-title);
+        }
+
+        /* Caution Card */
+        .caution-card {
+            background: var(--caution-bg);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .gallery-slides {
+                height: 250px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+            
+            .card-title {
+                font-size: 1.4rem;
+                padding-left: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle" id="darkModeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Animated Luxury Header -->
+    <div class="luxury-header">
+        <div class="container">
+            <h1><i class="fas fa-fungus"></i> දිය මලන්කෑම <small style="font-size: 1rem; opacity: 0.8;">(දිලීර රෝග)</small></h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Premium Image Gallery with Dots -->
+        <div class="gallery-container" id="imageSlider">
+            <div class="gallery-slides">
+                <div class="gallery-slide">
+                    <img src="https://eranda47.github.io/CropCare/Images/Dampingoff/dampingoff4cc.webp" alt="දිය මලන්කෑම රෝගය - රෝග ලක්ෂණ 1">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://eranda47.github.io/CropCare/Images/Dampingoff/dampingoff1.webp" alt="දිය මලන්කෑම රෝගය - රෝග ලක්ෂණ 2">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://eranda47.github.io/CropCare/Images/Dampingoff/dampingoff2.webp" alt="දිය මලන්කෑම රෝගය - රෝග ලක්ෂණ 3">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://eranda47.github.io/CropCare/Images/Dampingoff/dampingoff3cc.webp" alt="දිය මලන්කෑම රෝගය - රෝග ලක්ෂණ 4">
+                </div>
+            </div>
+        </div>
+        <div class="gallery-dots" id="galleryDots"></div>
+
+        <!-- Symptoms Card -->
+        <div class="card symptoms-card">
+            <div class="info-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h2 class="card-title symptoms-title"><i class="fas fa-search"></i> රෝග ලක්ෂණ</h2>
+            <ul>
+                <li>බීජ පස තුළ දීම කුණුවී යාම.</li>
+                <li>පැළයේ කඳ පාමුල ජලය තැවරුණු ආකාරයේ, කළු පැහැති තුවාල ඇතිවීම.</li>
+                <li>පැළ මත සුදු පැහැති පුස් වැනි වර්ධනයක් දක්නට ලැබේ.</li>
+                <li>පැළ සිටුවීමට පෙර සහ සිටුවීමෙන් පසු යන අවස්ථා දෙකේදීම මෙම රෝගය හට ගත හැකිය.</li>
+                <li>පැළ සිටුවීමට පෙර අවස්ථාවේදී, බීජ පසට දැමූ විගසම දිලීරය බීජවලට ඇතුල් වී, කුණුවීමට හේතු වන අතර, එම නිසා බීජ පැළවීම නතර වේ.</li>
+                <li>පැළ සිටුවීමෙන් පසු අවස්ථාවේදී, පැළ දුර්වල ලෙස වර්ධනය වන අතර, කඳ පාමුල කුණුවීමට පටන් ගනී.</li>
+                <li>කඳ මෘදු හා ලිහිල් වන අතර, ජලය තැවරුණු ආකාරයේ අළු, දුඹුරු හෝ කළු පැහැති තුවාල දක්නට ලැබේ.</li>
+                <li>තරුණ පැළ හෝ ගස් කහ පැහැයට හැරී, මැලවීමට පටන් ගෙන, අවසානයේදී කඳ පාමුල කැපුවාක් මෙන් බිම පතිත වේ.</li>
+                <li>මිය ගිය පැළ මත හෝ පස මතුපිට සුදු හෝ අළු පුස් වැනි වර්ධනයක් දිස්වේ.</li>
+            </ul>
+        </div>
+
+        <!-- Prevention Card -->
+        <div class="card prevention-card">
+            <div class="info-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h2 class="card-title prevention-title"><i class="fas fa-shield-alt"></i> දියමලන්කෑම වැළැක්වාගැනීමට ගතහැකි ක්‍රියාමාර්ග</h2>
+            
+            <p><span class="bold">නිරෝගී බීජ භාවිතය:</span></p>
+            <ul>
+                <li>නිරෝගී පැළවලින් හෝ සහතික කළ බීජ භාවිතා කරන්න.</li>
+                <li>හැකි නම්, රෝගයට ප්‍රතිරෝධී ප්‍රභේද භාවිතා කරන්න.</li>
+            </ul>
+            
+            <p><span class="bold">නිසි රෝපණ ක්‍රම:</span></p>
+            <ul>
+                <li>ජලය හොඳින් රැදෙන හෝ තෙත් පස සහිත ස්ථානවල උස් වූ පාත්ති භාවිතා කරන්න.</li>
+                <li>පැළ වියළීයාම අඩු කිරීම සඳහා බීජ හෝ පැළ සිටුවීමේදී අතර පරතරය වැඩි කරන්න.</li>
+                <li>පැළ බද්ධ කිරීමේදී ඒවා ඉතා ගැඹුරට සිටුවීමෙන් වළකින්න.</li>
+            </ul>
+            
+            <p><span class="bold">ක්ෂේත්‍ර කළමනාකරණය:</span></p>
+            <ul>
+                <li>පළමු රෝග ලක්ෂණ මතු වූ වහාම ආසාදිත පැළ ඉවත් කරන්න.</li>
+                <li>නිර්දේශයට අනුව පොහොර යොදන්න.</li>
+                <li>නිතිපතා මතුපිටින් ජලය සපයන්න.</li>
+                <li>පස මතුපිට ජලය සවස් වන විට වියළී යන පරිදි උදෑසන මුල් කාලයේදී ජලය සපයන්න.</li>
+                <li>කඳ සමඟ ජලය සෘජුව ස්පර්ශ නොවන පරිදි වළලු ආකාර ජල සම්පාදන ක්‍රමය අනුගමනය කරන්න.</li>
+            </ul>
+            
+            <p><span class="bold">සනීපාරක්ෂාව සහ පිරිසිදුකම:</span></p>
+            <ul>
+                <li>එක් භූමියක සිට තවත් භූමියකට මඩ, පස් ගෙනයාමෙන් වැළකීමට වගබලා ගන්න. මෙවලම් සහ උපකරණ හොඳින් විෂබීජහරණය කරන්න.</li>
+                <li>අස්වැන්න නෙලීමෙන් පසු ශාක අපද්‍රව්‍ය ඉවත් කර විනාශ කරන්න.</li>
+                <li>රෝගයට ගොදුරු නොවන පැළ සමඟ භෝග මාරුව සැලසුම් කරන්න.</li>
+                <li>හැකි නම්, විනිවිද පෙනෙන වසුනක් සමඟ බීජ පාත්ති සැකසීමෙන් පස සූර්ය විකිරණයට නිරාවරණය කරන්න.</li>
+            </ul>
+        </div>
+
+        <!-- Organic Methods -->
+        <div class="card organic-card">
+            <div class="info-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h2 class="card-title organic-title"><i class="fas fa-leaf"></i> දියමලන්කෑම සඳහා කාබනික පාලන ක්‍රම</h2>
+            
+            <p><span class="bold">නීම් තෙල් (කොහොඹ නිස්සාරකය):</span></p>
+            <ul>
+                <li>ස්වභාවික දිලීර නාශකයකි. එය රෝග කාරකයන්ගේ ජීවන චක්‍රය කඩාකප්පල් කර ආසාදනය වැළැක්වීමට උපකාරී වේ. නිෂ්පාදන ලේබලයට අනුව නීම් තෙල් වතුර සමඟ මිශ්‍ර කර පසට සහ පැළවලට ඉසින්න.</li>
+            </ul>
+            
+            <p><span class="bold">සුදු ළූණු නිස්සාරකය:</span></p>
+            <ul>
+                <li>සුදු ළූණු වල දිලීර වර්ධනය වළක්වන දිලීර නාශක ගුණ ඇත. සුදු ළූණු බිම දමා, වතුරේ පොඟවා, පෙරා, සුදු ළූණු මිශ්‍ර කළ ජලය පැළවලට ඉසින්න.</li>
+            </ul>
+            
+            <p><span class="bold">කහ, ඉඟුරු, දෙහි සහ ගම්මිරිස්:</span></p>
+            <ul>
+                <li>මෙම ශාක සාරවල ස්වභාවික දිලීර නාශක ගුණ ඇති අතර රසායනික දිලීර නාශක සඳහා පරිසර හිතකාමී ආදේශක ලෙස භාවිතා කළ හැකිය.</li>
+            </ul>
+        </div>
+
+        <!-- Chemical Methods -->
+        <div class="card chemical-card">
+            <div class="info-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h2 class="card-title chemical-title"><i class="fas fa-flask"></i> දියමලන්කෑම සඳහා රසායනික පාලන ක්‍රම</h2>
+            
+            <p><span class="bold">මෙටලැක්සිල් (Metalaxyl):</span></p>
+            <ul>
+                <li>නිෂ්පාදන ලේබලය පරීක්ෂා කර බැලීම අත්‍යවශ්‍යයි. සාමාන්‍යයෙන්, මෙය පසට යෙදීමක් හෝ බීජ ප්‍රතිකාරයක් ලෙස භාවිතා වේ. පසට යොදයි නම් පැළවල පාදය වටා පසට යොදන්න. බීජ ප්‍රතිකාර ලෙස යොදනවනම් සිටුවීමට පෙර බීජ ආලේප කරන්න.</li>
+                <li>සාමාන්‍යයෙන් සිටුවීමේදී හෝ බද්ධ කිරීමේදී එක් වරක් යොදනු ලැබේ. රෝග ලක්ෂණ දිගටම පවතින්නේ නම් නැවත යොදන්න, නමුත් ලේබලයේ උපදෙස් පිළිපදින්න.</li>
+                <li>එළවළු (විශේෂයෙන් තක්කාලි, මිරිස්, ගෝවා), විසිතුරු පැළ</li>
+                <li>මෙටලැක්සිල් යනු පද්ධතිමය දිලීර නාශකයකි, එනම් එය ශාකය විසින් අවශෝෂණය කර ගනී.</li>
+            </ul>
+            
+            <p><span class="bold">මැන්කොසෙබ් (Mancozeb):</span></p>
+            <ul>
+                <li>සාමාන්‍යයෙන් වතුර ලීටරයකට ග්‍රෑම් 2 සිට 2.5 දක්වා මිශ්‍ර කරයි. ලේබලය පරීක්ෂා කර බලන්න.</li>
+                <li>පත්‍ර වලට ඉසීම හෝ පසට යොදයි.</li>
+                <li>රෝගයේ තීව්‍රතාවය සහ ලේබලයේ උපදෙස් අනුව සෑම දින 7-10 කට වරක් යෙදිය හැක.</li>
+                <li>පුළුල් පරාසයක එළවළු, පලතුරු සහ ක්ෂේත්‍ර බෝග සදහා යෝග්‍ය වේ.</li>
+                <li>මැන්කොසෙබ් යනු ආරක්ෂක දිලීර නාශකයකි, එබැවින් රෝගය ඇතිවීමට පෙර යෙදිය යුතුය.</li>
+            </ul>
+            
+            <p><span class="bold">තිරාම් (Thiram):</span></p>
+            <ul>
+                <li>බීජ ප්‍රතිකාරයක් ලෙස භාවිතා කර්‍රයි. ලේබලයේ උපදෙස් හොඳින් අනුගමනය කරන්න. භෝගය සහ බීජ ප්‍රමාණය අනුව මාත්‍රාව වෙනස් වේ.</li>
+                <li>ප්‍රධාන වශයෙන් බීජ ප්‍රතිකාරයක් ලෙස භාවිතා කරයි.</li>
+                <li>සිටුවීමට පෙර බීජ ප්‍රතිකාරයක් ලෙස එක් වරක් යොදන්න.</li>
+                <li>බොහෝ එළවළු, ධාන්‍ය සහ රනිල කුලයේ බෝග සදහා සුදුසුයි.</li>
+                <li>තිරාම් ප්‍රරෝහණයේදී බීජ දිලීර ප්‍රහාර වලින් ආරක්ෂා කරයි.</li>
+            </ul>
+            
+            <p><span class="bold">කැප්ටන් (Captan):</span></p>
+            <ul>
+                <li>බීජ ප්‍රතිකාරයක් ලෙස යොදයි.ලේබලයේ උපදෙස් හොඳින් අනුගමනය කරන්න. බෝගය සහ බීජ ප්‍රමාණය අනුව මාත්‍රාව වෙනස් වේ.</li>
+                <li>බීජ ප්‍රතිකාරයක් ලෙස හෝ පසට යෙදීම කල හැක.</li>
+                <li>විවිධ එළවළු, පලතුරු සහ විසිතුරු පැළ සදහා සුදුසු වේ.</li>
+                <li>කැප්ටන් යනු පුළුල් පරාසයක ආරක්ෂක දිලීර නාශකයකි.</li>
+            </ul>
+            
+            <p><span class="bold">තඹ පදනම් කරගත් දිලීර නාශක (උදා: තඹ ඔක්සික්ලෝරයිඩ් - Copper Oxychloride):</span></p>
+            <ul>
+                <li>සාමාන්‍යයෙන් වතුර ලීටරයකට ග්‍රෑම් 2 සිට 3 දක්වා, නිෂ්පාදන ලේබලය බලන්න.</li>
+                <li>පත්‍ර වලට ඉසීම හෝ පසට යෙදීම කල හැක.</li>
+                <li>රෝගයේ තීව්‍රතාවය අනුව සෑම දින 7-14 කට වරක් යොදන්න.</li>
+                <li>එළවළු සහ පලතුරු බෝග සදහා සුදුසු වේ.</li>
+                <li>තඹ දිලීර නාශක ආරක්ෂක වන අතර රෝගය ආරම්භ වීමට පෙර යෙදූ විට වඩාත් හොඳින් ක්‍රියා කරයි.</li>
+            </ul>
+        </div>
+
+        <!-- Caution Card -->
+        <div class="card caution-card">
+            <div class="info-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h2 class="card-title"><i class="fas fa-exclamation-triangle"></i> වැදගත් කරුණු</h2>
+            <ul>
+                <li>සෑම විටම ලේබලය කියවා අනුගමනය කරන්න. ලේබලයහි; මාත්‍රාව, යෙදීම, ආරක්ෂාව සහ අස්වැන්න නෙළීමට පෙර කාල පරතරයන් පිළිබඳ වැදගත් තොරතුරු අඩංගු වේ.</li>
+                <li>ඒකාබද්ධ පළිබෝධ කළමනාකරණය (IPM): රෝගවලින් තොර බීජ භාවිතා කිරීම, පස ජලය බැස යාම වැඩි දියුණු කිරීම, හොඳ වායු සංසරණය සහතික කිරීම සහ බෝග භ්‍රමණය පුහුණු කිරීම වැනි සංස්කෘතික පිළිවෙත් සමඟ රසායනික පාලනය ඒකාබද්ධ කරන්න.</li>
+                <li>ප්‍රතිරෝධී කළමනාකරණය: දිලීර දිලීර නාශක වලට ප්‍රතිරෝධය දැක්වීම වැළැක්වීම සඳහා, විවිධ වර්ගයේ දිලීර නාශක මාරු කර නැවත නැවතත් එකම දිලීර නාශකය භාවිතා කිරීමෙන් වළකින්න.</li>
+                <li>ආරක්ෂාව: පළිබෝධනාශක හැසිරවීමේදී සුදුසු ආරක්ෂිත ඇඳුම් (අත්වැසුම්, වෙස් මුහුණු, අක්ෂි ආරක්ෂණය) පළඳින්න.</li>
+            </ul>
+        </div>
+
+        <!-- Additional Info Card -->
+        <div class="card resource-card">
+            <div class="info-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h2 class="card-title resource-title"><i class="fas fa-info-circle"></i> දියමලන්කෑම පිළිබඳ වැඩිදුර තොරතුරු</h2>
+            
+            <p><span class="bold">විද්‍යාත්මක නාමය:</span> පයිතියම් (Pythium) විශේෂ.</p>
+            
+            <p><span class="bold">මෙම රෝගය වැළදිය හැකි වෙනත් භෝග:</span> මිරිස්, බඩ ඉරිඟු, කොමඩු, තිරිඟු, කරවිල, වට්ටක්කා, උක්, සලාද, කඩල, බණ්ඩක්කා, පැපොල්, වම්බටු, කැරට්, පෙයාර්ස්, සෝර්ගම්, කහ, සෝයා බෝංචි, පරිප්පු, අර්තාපල්, විසිතුරු පැළ, අඹ, ගෝවා, ළූණු, තක්කාලි, බාර්ලි, රටකජු, බෝංචි, මෙනේරි, මිදි, කපු, පිපිඤ්ඤා, ගෝවා, ඉඟුරු වැනි බොහෝ භෝග වලටද මෙම රෝගය බලපෑම් ඇති කරයි.</p>
+            
+            <p><span class="bold">රෝගයට හේතු:</span></p>
+            <ul>
+                <li>දිය මැලවීම රෝගය පයිතියම් (Pythium) කුලකයේ දිලීර මගින් ඇති වන අතර, මෙම දිලීර පසෙහි හෝ ශාක අපද්‍රව්‍යවල වසර ගණනාවක් ජීවත් විය හැකිය.</li>
+                <li>උණුසුම් සහ වැසි සහිත කාලගුණයක් පවතින විට, පස අධික ලෙස තෙතමනය සහිත වන විට සහ පැළ ඝන ලෙස සිටුවා ඇති විට මෙම දිලීර හොඳින් වර්ධනය වේ.</li>
+                <li>ජලය බැස නොයෑම හෝ අධික නයිට්‍රජන් යෙදීම වැනි ආතති සහගත තත්වයන් ශාක දුර්වල කරන අතර රෝගය වර්ධනය වීමට ද හේතු වේ.</li>
+                <li>මෙවලම් හෝ උපකරණ සහ ඇඳුම් හෝ සපත්තු මත ඇති මඩ හරහා බීජාණු පැතිරෙයි.</li>
+                <li>මෙම දිලීර ශාකයේ සම්පූර්ණ ජීවන චක්‍රය පුරාම හානි කල හැකි වුවද, ප්‍රරෝහණය වන බීජ හෝ තරුණ පැළ වඩාත් අවදානමට ලක් වේ.</li>
+                <li>මෙම රෝගය එක් කන්නයක සිට තවත් කන්නයකට එකම ස්ථානයක පැතිරීම අනිවාර්ය නොවේ, නමුත් ආසාදනයට හිතකර තත්වයන් ඇති විට සහ ස්ථානවල දිස් වේ.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        © KrushiMie. All Rights Reserved.
+    </footer>
+
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const icon = darkModeToggle.querySelector('i');
+            
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // Image Slider with Touch Support and Dots
+        const slider = document.getElementById('imageSlider');
+        const slides = document.querySelector('.gallery-slides');
+        const dotsContainer = document.getElementById('galleryDots');
+        const slideCount = document.querySelectorAll('.gallery-slide').length;
+        let currentIndex = 0;
+        let isDragging = false;
+        let startPosX = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID;
+        let autoScrollInterval;
+
+        // Create dots
+        for (let i = 0; i < slideCount; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('gallery-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                currentIndex = i;
+                updateSliderPosition();
+                updateDots();
+                resetAutoScroll();
+            });
+            dotsContainer.appendChild(dot);
+        }
+
+        // Update dots
+        function updateDots() {
+            const dots = document.querySelectorAll('.gallery-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        // Auto-scroll
+        function startAutoScroll() {
+            autoScrollInterval = setInterval(() => {
+                if (!isDragging) {
+                    currentIndex = (currentIndex + 1) % slideCount;
+                    updateSliderPosition();
+                    updateDots();
+                }
+            }, 5000);
+        }
+
+        function resetAutoScroll() {
+            clearInterval(autoScrollInterval);
+            startAutoScroll();
+        }
+
+        function updateSliderPosition() {
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        // Touch events
+        slider.addEventListener('touchstart', touchStart);
+        slider.addEventListener('touchmove', touchMove);
+        slider.addEventListener('touchend', touchEnd);
+
+        // Mouse events for desktop testing
+        slider.addEventListener('mousedown', touchStart);
+        slider.addEventListener('mousemove', touchMove);
+        slider.addEventListener('mouseup', touchEnd);
+        slider.addEventListener('mouseleave', touchEnd);
+
+        function touchStart(e) {
+            isDragging = true;
+            startPosX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            clearInterval(autoScrollInterval);
+            cancelAnimationFrame(animationID);
+        }
+
+        function touchMove(e) {
+            if (isDragging) {
+                const currentPosition = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                currentTranslate = prevTranslate + currentPosition - startPosX;
+            }
+        }
+
+        function touchEnd() {
+            isDragging = false;
+            const movedBy = currentTranslate - prevTranslate;
+
+            if (movedBy < -50 && currentIndex < slideCount - 1) {
+                currentIndex += 1;
+            } else if (movedBy > 50 && currentIndex > 0) {
+                currentIndex -= 1;
+            }
+
+            updateSliderPosition();
+            updateDots();
+            prevTranslate = currentIndex * -slider.offsetWidth;
+            resetAutoScroll();
+        }
+
+        // Pinch-to-zoom would require additional libraries like Hammer.js for proper implementation
+        // This is a simplified version that allows zooming
+        slider.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const img = document.querySelector('.gallery-slide:nth-child(' + (currentIndex + 1) + ') img');
+            const scale = e.deltaY > 0 ? 0.9 : 1.1;
+            img.style.transform = img.style.transform ? `scale(${parseFloat(img.style.transform.replace('scale(', '')) * scale})` : `scale(${scale})`;
+        }, { passive: false });
+
+        // Initialize
+        startAutoScroll();
+    </script>
+</body>
+</html>
